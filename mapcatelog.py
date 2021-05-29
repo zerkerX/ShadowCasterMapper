@@ -1,5 +1,5 @@
-#!/usr/bin/python
-# Copyright 2012 Ryan Armstrong
+#!/usr/bin/python3
+# Copyright 2012,2021 Ryan Armstrong
 #
 # This file is part of Shadow Caster Isometric Mapper.
 #
