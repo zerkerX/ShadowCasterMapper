@@ -75,7 +75,7 @@ class debugmapper:
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
-        print """Usage: python shadowdebugmapper.py [LIB FILE]...
+        print("""Usage: python shadowdebugmapper.py [LIB FILE]...
 
 Generates a debug HTML file for each level in the specified LIB file.
 Each index in the map is output into a cell in an HTML table
@@ -83,7 +83,7 @@ containing the following information:
 The map index
 the value for each of the map layers, in order
 ...
-"""
+""")
     else:
 
         for filename in sys.argv[1:]:

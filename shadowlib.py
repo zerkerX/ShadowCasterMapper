@@ -64,14 +64,14 @@ class LibFile:
         """
         listing = open(listfile, 'w')
 
-        for lump in self.db.values():
+        for lump in list(self.db.values()):
             listing.write('{}\t{}\n'.format(lump.name, lump.size))
 
         listing.close()
 
     def loadall(self):
         """ Loads and processes all data from the lib file."""
-        for lump in self.db.values():
+        for lump in list(self.db.values()):
             lump.load()
 
     @staticmethod
@@ -88,7 +88,7 @@ class LibFile:
         """
         self.createpath(outpath)
 
-        for lump in self.db.values():
+        for lump in list(self.db.values()):
             lump.save(os.path.join(outpath, lump.name))
 
     def close(self):
@@ -147,11 +147,11 @@ class Lump(object):
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
-        print """Usage: python shadowlib.py [LIB FILE]
+        print("""Usage: python shadowlib.py [LIB FILE]
 
 Extracts the complete contents of a given Shadowcaster lib file.
 Resources are not interpreted and are written as-is.
-"""
+""")
     else:
         for filename in sys.argv[1:]:
             lib = LibFile(filename)

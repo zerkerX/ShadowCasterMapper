@@ -27,11 +27,11 @@ import shadowlib
 
 # Directional constants. Ordered Counter-clockwise so that first
 # two entries match how walls are drawn
-(NORTH, WEST, SOUTH, EAST) = range(4)
+(NORTH, WEST, SOUTH, EAST) = list(range(4))
 
 # Layer Enum:
 (FLOOR, FLOORHEIGHT, CEILING, CEILINGHEIGHT, NORTHWALL, NORTHWALLHEIGHT, WESTWALL,
-    WESTWALLHEIGHT, UNKNOWN) = range(9)
+    WESTWALLHEIGHT, UNKNOWN) = list(range(9))
 
 class MapSet:
     """ A set of ShadowCaster map files.
@@ -44,7 +44,7 @@ class MapSet:
         """ Loads map data for every map found in the specified lib."""
         self.maps = {}
 
-        for filename, lump in libfile.db.items():
+        for filename, lump in list(libfile.db.items()):
             if filename.endswith('.map'):
                 lump.__class__ = MapLump
                 lump.load()
@@ -79,7 +79,7 @@ class MapSet:
         """
         self.createpath(outpath)
 
-        for shmap in self.maps.values():
+        for shmap in list(self.maps.values()):
             shmap.debugpics(outpath)
 
 class Map(object):
@@ -237,7 +237,7 @@ class ItemLump(DoorLump):
             tempitem = Item(tempdata)
             self.rawdata.append(tempdata)
             index = Map.mapindex(tempitem.x, tempitem.y)
-            if index not in self.data.keys():
+            if index not in list(self.data.keys()):
                 self.data[index] = []
             self.data[index].append(tempitem)
 
@@ -292,7 +292,7 @@ class ObjectLump(DoorLump):
             tempobject = ShObject(tempdata)
             self.rawdata.append(tempdata)
             index = Map.mapindex(tempobject.x, tempobject.y)
-            if index not in self.data.keys():
+            if index not in list(self.data.keys()):
                 self.data[index] = []
             self.data[index].append(tempobject)
 

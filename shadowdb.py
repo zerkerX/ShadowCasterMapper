@@ -380,7 +380,7 @@ class db:
 
     def loaddoors(self):
         """ Populates the dictionary of door tiles. """
-        for group in self.cddat.data['walls'].keys():
+        for group in list(self.cddat.data['walls'].keys()):
             if 'door' in group or \
                     group in ['wanim_eyes1', 'wanim_eyes2']:
                 self.doors[group] = thintile(self.cddat.data['walls'][group][0].data)
@@ -388,7 +388,7 @@ class db:
 
     def loadobjects(self):
         """ Populates the dictionary of objects. """
-        for groupname, group in self.cddat.data['sprites'].items():
+        for groupname, group in list(self.cddat.data['sprites'].items()):
             # Ideal index and height for most objects
             objectprefs = {'skelstatue' : (7, 0),
                 'tipobelisk': (1, 0),

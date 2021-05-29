@@ -122,9 +122,9 @@ class DatFile:
         """
         listing = open(listfile, 'w')
 
-        for block in self.data.keys():
+        for block in list(self.data.keys()):
             listing.write("\n{}\n============================\n".format(block))
-            for group in self.data[block].keys():
+            for group in list(self.data[block].keys()):
                 listing.write("\n{}\n----------------------------\n".format(group))
                 for lump in self.data[block][group]:
                     listing.write('{:X}\t{}\t{:X}\n'.format(
@@ -134,8 +134,8 @@ class DatFile:
 
     def loadall(self):
         """ Loads and processes all data from the dat file."""
-        for block in self.data.keys():
-            for group in self.data[block].keys():
+        for block in list(self.data.keys()):
+            for group in list(self.data[block].keys()):
                 for lumpnum, lump in enumerate(self.data[block][group]):
                     try:
                         if block == 'walls':
@@ -163,7 +163,7 @@ class DatFile:
                         else:
                             lump.load()
                     except:
-                        print "Problem with {}.{}[{}]".format(block, group, lumpnum)
+                        print("Problem with {}.{}[{}]".format(block, group, lumpnum))
                         traceback.print_exc()
 
                         # Re-load as raw
@@ -182,8 +182,8 @@ class DatFile:
         """ Dumps the complete contents of this DAT file to disk in
         the specified folder.
         """
-        for block in self.data.keys():
-            for group in self.data[block].keys():
+        for block in list(self.data.keys()):
+            for group in list(self.data[block].keys()):
                 writepath = os.path.join(outpath, block)
                 self.createpath(writepath)
                 for index, lump in enumerate(self.data[block][group]):
@@ -191,7 +191,7 @@ class DatFile:
                         lump.save(os.path.join(writepath,
                             '{}-{:02}'.format(group, index)))
                     except:
-                        print "Problem saving {}.{}[{}]".format(block, group, index)
+                        print("Problem saving {}.{}[{}]".format(block, group, index))
                         traceback.print_exc()
 
 
@@ -401,14 +401,14 @@ class GUILump(WallLump):
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
-        print """Usage: python shadowdat.py [DAT FILE]
+        print("""Usage: python shadowdat.py [DAT FILE]
 
 Extracts the complete contents of a give Shadowcaster dat file.
 Does not support the cutscene dat files from the CD version, only
 cd_castr.dat and hd_castr.dat. The .dat file from the floppy version may
 also work, although it is unknown how frequently the floppy version uses
 the RLE flag.
-"""
+""")
     else:
         for filename in sys.argv[1:]:
             dat = DatFile(filename)

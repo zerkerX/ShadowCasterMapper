@@ -79,13 +79,13 @@ td {{
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
-        print """Usage: python shadowsimplemapper.py [LIB FILE]...
+        print("""Usage: python shadowsimplemapper.py [LIB FILE]...
 
 Generates a debug HTML file for each level in the specified LIB file.
 Each index in the map is output into a cell in an HTML table
 with lines representing walls.
 ...
-"""
+""")
     else:
 
         filename = sys.argv[1]

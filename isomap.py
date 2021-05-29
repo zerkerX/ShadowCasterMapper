@@ -52,15 +52,15 @@ class isomap(object):
 
         # Populate the door, item, object, creature, markup  objects
         # at their corresponding locations when present.
-        for index, door in mapdata.doorlump.data.items():
+        for index, door in list(mapdata.doorlump.data.items()):
             self.data[index].adddoor(door, database)
-        for index, items in mapdata.itemlump.data.items():
+        for index, items in list(mapdata.itemlump.data.items()):
             self.data[index].additems(items, database)
-        for index, shobjects in mapdata.objectlump.data.items():
+        for index, shobjects in list(mapdata.objectlump.data.items()):
             self.data[index].addobjects(shobjects, database)
 
         database.loadcreatures(mapdata.actorlump.data)
-        for index, creature in mapdata.creaturelump.data.items():
+        for index, creature in list(mapdata.creaturelump.data.items()):
             self.data[index].addcreature(creature, database)
 
         for index, markupitem in catelogentry.markup:
@@ -257,11 +257,11 @@ class MapSpot(object):
 
 if __name__ == "__main__":
     if len(sys.argv) < 4:
-        print """Usage: python isomap.py [LIB FILE] [cd_castr.dat] [hd_castr.dat]
+        print("""Usage: python isomap.py [LIB FILE] [cd_castr.dat] [hd_castr.dat]
 
 Generates a isometric map for each level in the specified Shadow Caster
 LIB file (typically shadow.lib). The DAT files are used for image data.
-"""
+""")
     else:
         (libname, cddatname, hddatname) = sys.argv[1:4]
 
@@ -280,11 +280,11 @@ LIB file (typically shadow.lib). The DAT files are used for image data.
             os.mkdir(outpath)
 
         for levelentry in catelog.maplist:
-            print "Initializing Map '{}'".format(levelentry.fullname)
+            print("Initializing Map '{}'".format(levelentry.fullname))
             mapper = isomap(maps.maps[levelentry.mapname], database, levelentry)
-            print "Generating Map '{}'".format(levelentry.fullname)
+            print("Generating Map '{}'".format(levelentry.fullname))
             mapper.generate()
-            print "Saving Map '{}'".format(levelentry.fullname)
+            print("Saving Map '{}'".format(levelentry.fullname))
             mapper.save(outpath)
 
         lib.close()
