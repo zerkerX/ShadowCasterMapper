@@ -168,13 +168,13 @@ class DoorLump(shadowlib.Lump):
         self.rawdata = []
         self.data = {}
 
-        for doornum in range(self.size / struct.calcsize(self.doordata)):
+        for doornum in range(self.size // struct.calcsize(self.doordata)):
             tempdata = list(struct.unpack(self.doordata,
                 self.filedata.read(struct.calcsize(self.doordata))))
             # Remove string content after the null character
             for index, char in enumerate(tempdata[4]):
-                if ord(char) == 0:
-                    tempdata[4] = tempdata[4][:index].lower()
+                if char == 0:
+                    tempdata[4] = tempdata[4][:index].lower().decode()
                     break
             tempdoor = Door(tempdata)
             self.rawdata.append(tempdata)
@@ -182,7 +182,7 @@ class DoorLump(shadowlib.Lump):
 
     def dumpcsv(self, filename):
         """ Debug method to write the raw door data to a CSV file. """
-        with open(filename, 'wb') as csvfile:
+        with open(filename, 'w', newline='') as csvfile:
             writer = csv.writer(csvfile)
             for datarow in self.rawdata:
                 writer.writerow(datarow)
@@ -231,7 +231,7 @@ class ItemLump(DoorLump):
         self.rawdata = []
         self.data = {}
 
-        for itemnum in range(self.size / struct.calcsize(self.itemdata)):
+        for itemnum in range(self.size // struct.calcsize(self.itemdata)):
             tempdata = list(struct.unpack(self.itemdata,
                 self.filedata.read(struct.calcsize(self.itemdata))))
             tempitem = Item(tempdata)
@@ -281,13 +281,13 @@ class ObjectLump(DoorLump):
         self.rawdata = []
         self.data = {}
 
-        for objectnum in range(self.size / struct.calcsize(self.objectdata)):
+        for objectnum in range(self.size // struct.calcsize(self.objectdata)):
             tempdata = list(struct.unpack(self.objectdata,
                 self.filedata.read(struct.calcsize(self.objectdata))))
             # Remove string content after the null character
             for index, char in enumerate(tempdata[4]):
-                if ord(char) == 0:
-                    tempdata[4] = tempdata[4][:index].lower()
+                if char == 0:
+                    tempdata[4] = tempdata[4][:index].lower().decode()
                     break
             tempobject = ShObject(tempdata)
             self.rawdata.append(tempdata)
@@ -336,7 +336,7 @@ class CreatureLump(DoorLump):
         self.rawdata = []
         self.data = {}
 
-        for creaturenum in range(self.size / struct.calcsize(self.creaturedata)):
+        for creaturenum in range(self.size // struct.calcsize(self.creaturedata)):
             tempdata = list(struct.unpack(self.creaturedata,
                 self.filedata.read(struct.calcsize(self.creaturedata))))
             tempcreature = Creature(tempdata)
@@ -380,19 +380,19 @@ class ActorLump(DoorLump):
         self.rawdata = []
         self.data = []
 
-        for actornum in range(self.size / struct.calcsize(self.actordata)):
+        for actornum in range(self.size // struct.calcsize(self.actordata)):
             tempdata = list(struct.unpack(self.actordata,
                 self.filedata.read(struct.calcsize(self.actordata))))
 
             # Remove the contents of the string after the null character
             # for names and sprite names.
             for index, char in enumerate(tempdata[4]):
-                if ord(char) == 0:
-                    tempdata[4] = tempdata[4][:index].lower()
+                if char == 0:
+                    tempdata[4] = tempdata[4][:index].lower().decode()
                     break
             for index, char in enumerate(tempdata[5]):
-                if ord(char) == 0:
-                    tempdata[5] = tempdata[5][:index].lower()
+                if char == 0:
+                    tempdata[5] = tempdata[5][:index].lower().decode()
                     break
             tempactor = Actor(tempdata)
             self.rawdata.append(tempdata)
