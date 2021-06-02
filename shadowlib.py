@@ -89,7 +89,7 @@ class LibFile:
         self.createpath(outpath)
 
         for lump in list(self.db.values()):
-            lump.save(os.path.join(outpath, lump.name))
+            lump.save(os.path.join(outpath, lump.name.decode()))
 
     def close(self):
         """ Closes the lib file."""
@@ -125,7 +125,7 @@ class Lump(object):
         """
         (self.size, self.pos, tempname) = struct.unpack(self.direntry,
             filedata.read(self.direntrysize()))
-        self.name = tempname.rstrip('\0')
+        self.name = tempname.rstrip(b'\0')
 
         # Cache file handle for future reads. Note that this will be invalid
         # if the LIB file itself is closed.
