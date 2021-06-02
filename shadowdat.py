@@ -102,7 +102,7 @@ class DatFile:
             prevpos = self.filedata.tell()
             self.filedata.seek(self.infotable + lump.nameoffs)
 
-            tempname = ''
+            tempname = b''
             namelen = 0
             tempchar= self.filedata.read(1)
             # Read up to the null character
@@ -112,7 +112,7 @@ class DatFile:
                 namelen = namelen + 1
 
             self.filedata.seek(prevpos)
-            return tempname.lower()
+            return tempname.decode().lower()
         else:
             return None
 
@@ -277,7 +277,7 @@ class WallLump(Lump):
         (qheight,) = struct.unpack('<H', self.filedata.read(2))
         coloffs = struct.unpack('<64H', self.filedata.read(128)) # Discard; Not needed
 
-        tempimage = Image.fromstring("P", (qheight*4, width),
+        tempimage = Image.frombytes("P", (qheight*4, width),
             self.filedata.read(self.size-130))
         tempimage.putpalette(palette)
 
@@ -309,7 +309,7 @@ class FlatLump(WallLump):
         """
         self.filedata.seek(self.pos, 0)
 
-        self.data = Image.fromstring("P", (64, 64),
+        self.data = Image.frombytes("P", (64, 64),
             self.filedata.read(self.size))
         self.data.putpalette(palette)
 
@@ -392,7 +392,7 @@ class GUILump(WallLump):
         width = 64
         (self.width, self.height, w2, h2) = struct.unpack('<HHHH', self.filedata.read(8))
 
-        tempimage = Image.fromstring("P", (self.width, self.height),
+        tempimage = Image.frombytes("P", (self.width, self.height),
             self.filedata.read(self.size-8))
         tempimage.putpalette(palette)
 
