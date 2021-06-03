@@ -95,7 +95,7 @@ the value for each of the map layers, in order
             if not os.path.exists(outpath):
                 os.mkdir(outpath)
 
-            for level in maps.maps:
+            for level in maps.maps.values():
                 mapper = debugmapper(level)
                 mapper.savemap(outpath)
 
