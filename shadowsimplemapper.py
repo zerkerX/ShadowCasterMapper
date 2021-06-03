@@ -97,7 +97,7 @@ with lines representing walls.
         if not os.path.exists(outpath):
             os.mkdir(outpath)
 
-        for level in maps.maps:
+        for level in maps.maps.values():
             mapper = debugmapper(level)
             mapper.savemap(outpath)
 
