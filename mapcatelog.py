@@ -133,7 +133,7 @@ class markupimage(object):
                 fill=(190,190,190))
 
         mapimage.paste(self.image,
-            (spot.isox -self.image.size[0]/2 +self.pos[0],
+            (spot.isox -self.image.size[0]//2 +self.pos[0],
             spot.isoy +self.pos[1]),
             self.image)
 

@@ -50,7 +50,7 @@ class tile(object):
         """ Skews the image to the left for isometric walls.
         For UP and DOWN (i.e. y axis) directions.
         """
-        return image.transform((image.size[0],int(image.size[1]+image.size[0]/2)),
+        return image.transform((image.size[0],int(image.size[1]+image.size[0]//2)),
             Image.AFFINE, (1, 0, 0, -0.5, 1, 0), Image.BICUBIC)
 
     @staticmethod
@@ -58,8 +58,8 @@ class tile(object):
         """ Skews the image to the right for isometric wals.
         For LEFT and RIGHT (i.e. x axis) directions.
         """
-        return image.transform((image.size[0],int(image.size[1]+image.size[0]/2)),
-            Image.AFFINE, (1, 0, 0, 0.5, 1, -image.size[0]/2), Image.BICUBIC)
+        return image.transform((image.size[0],int(image.size[1]+image.size[0]//2)),
+            Image.AFFINE, (1, 0, 0, 0.5, 1, -image.size[0]//2), Image.BICUBIC)
 
 
 class emptytile(tile):
@@ -274,7 +274,7 @@ class sprite(object):
                 current tile being drawn.
         """
         subisox = objdata.subx-objdata.suby
-        subisoy = (objdata.subx+objdata.suby)/2
+        subisoy = (objdata.subx+objdata.suby)//2
 
         if self.floatimage != None:
             pen.line([(spot.isox-subisox,spot.isoy),
@@ -286,14 +286,14 @@ class sprite(object):
                 spot.isoy +spot.floordepth -self.height + subisoy -5)],
                 fill=(190,190,190))
             mapimage.paste(self.floatimage,
-                (spot.isox-self.floatimage.size[0]/2-subisox,
+                (spot.isox-self.floatimage.size[0]//2-subisox,
                 spot.isoy -self.floatimage.size[1]),
                 self.floatimage)
 
         if self.height < 0:
             # Height < 0 means ceiling object:
             mapimage.paste(self.image,
-                (spot.isox-self.image.size[0]/2-subisox,
+                (spot.isox-self.image.size[0]//2-subisox,
                 spot.isoy +spot.ceildepth + subisoy),
                 self.image)
 
@@ -302,7 +302,7 @@ class sprite(object):
             height = min(self.height, (spot.floordepth - spot.ceildepth) - self.image.size[1])
 
             mapimage.paste(self.image,
-                (spot.isox-self.image.size[0]/2-subisox,
+                (spot.isox-self.image.size[0]//2-subisox,
                 spot.isoy +spot.floordepth -height + subisoy -self.image.size[1]),
                 self.image)
 

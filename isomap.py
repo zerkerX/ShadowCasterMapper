@@ -138,7 +138,7 @@ class MapSpot(object):
 
         self.index = index
         self.x = index % 32
-        self.y = index / 32
+        self.y = index // 32
 
         # Coordinates of the top point of the isometric tile in the output
         # Map is rotated clockwise for easier drawing
