@@ -284,7 +284,7 @@ class WallLump(Lump):
         if processmask:
             tempimage = self.maskimage(tempimage)
 
-        self.data = ImageOps.mirror(tempimage.rotate(-90))
+        self.data = ImageOps.mirror(tempimage.rotate(-90, expand=True))
 
     def save(self, filename):
         """ Saves this lump to the specified filename. Note that the
