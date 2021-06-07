@@ -2,17 +2,18 @@
 
 This is a series of Python scripts to generate Isometric views of 
 Shadow Caster maps, as well as extract most of the Shadow Caster 
-Resources. These scripts require [the Python Imaging Library 
-(PIL)][pil] and [Python 2.x][py] (tested with Python 2.7.3). PIL 
-unfortunately does not yet support Python 3, which prevents these 
-scripts from being forward-compatible at this time.
+Resources. These scripts require [the Pillow fork of the Python Imaging Library 
+(PIL)][pil] and [Python 3.x][py]. This was tested with Python 3.9.2,
+but it does not use any recently-introduced features. As such, it should
+run with just about any version of Python 3. At the time of writing,
+the oldest version of Python still receiving updates is 3.6, so I do
+not recommend anything older.
 
-Windows users should be able to download Python and PIL from the above
-links. Most Linux/Unix varients should be able to install Python and PIL
-via your package manager of choice; Ubuntu users can install the
-**python** and **python-imaging** libraries. OSX users should already
-have Python, but you may need to compile PIL yourself via the source
-download at the PIL website.
+Windows and macOS users should be able to download Python from the 
+above links and use ``pip`` to install Pillow. Most Linux/Unix varients 
+should be able to install Python and Pillow via your package manager of 
+choice; Ubuntu users can install the **python3** and **python3-pil** 
+libraries.
 
 The scripts also obviously require **Shadow Caster (CD version)**, which
 can be a bit hard to find nowadays. Purchasing a used copy on eBay or
@@ -25,8 +26,8 @@ were instrumental in the development of these tools.
 Please note the **sample.png** image file is used to obtain the Shadow
 Caster colour palette and is required for this tool to work.
 
-[pil]: http://www.pythonware.com/products/pil/index.htm
-[py]: http://python.org/
+[pil]: https://pillow.readthedocs.io/en/stable/
+[py]:  http://python.org/
 [slade]: http://slade.mancubus.net/
 [doomworld]: http://www.doomworld.com/vb/everything-else/43927-shadowcaster-modding/
 
